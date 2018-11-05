@@ -2,6 +2,7 @@ package ru.oskerko;
 
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -10,15 +11,16 @@ public class BaseRunner {
 
     protected WebDriver driver;
     protected String baseUrl;
-
+    protected WebDriverWait wait = null;
     @Before
     public void setUp(){
        if(driverContainer.get()!= null){
            driver = driverContainer.get();
        } else {
            driver = getDriver();
-           driverContainer.set(driver);
+           wait = new WebDriverWait(driver,10);
 
+           driverContainer.set(driver);
            Runtime.getRuntime().addShutdownHook(new Thread(()->{
                driver.quit();
                driver = null;
