@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.oskerko.elements.Button;
 import ru.oskerko.elements.CheckBox;
 import ru.oskerko.elements.Select;
@@ -11,6 +13,7 @@ import ru.oskerko.elements.Select;
 import static org.junit.Assert.assertTrue;
 
 public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
+    Logger logger = LoggerFactory.getLogger(TinkoffMobilePage.class);
     private static final String TINKOFF_MOBILE_TARIFFS_LINK = "https://www.tinkoff.ru/mobile-operator/tariffs/";
     private static final String MOSCOW = "Москва";
     private static final String KRASNODAR = "Краснодар";
@@ -50,11 +53,13 @@ public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
     }
 
     public TinkoffMobilePage rejectRegionChoice(){
+        logger.info("Отклоняем предложенный регион");
         getRegionRejectionElement().click();
         return this;
     }
 
     public TinkoffMobilePage selectMoscowRegion(){
+        logger.info("Выбираем регион Москва");
         getMoscowLinkElement().click();
         return this;
     }
@@ -77,6 +82,7 @@ public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
     }
 
     public TinkoffMobilePage checkRegion(String region){
+        logger.info("Проверяем что текущий регион - "+region);
         wait.until((driver) -> getCurrentRegionElement().getText().contains(region));
         assertTrue(getCurrentRegionElement().getText().contains(region));
         return this;
@@ -95,10 +101,12 @@ public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
     }
 
     public TinkoffMobilePage chooseMoscow(){
+        logger.info("Выбираем регион Москва");
         changeRegion(MOSCOW_REGION_LINK, MOSCOW);
         return this;
     }
     public TinkoffMobilePage chooseKrasnodar(){
+        logger.info("Выбираем регион Краснодар");
         changeRegion(KRASNODAR_REGION_LINK, KRASNODAR);
         return this;
     }
@@ -132,6 +140,7 @@ public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
     }
 
     public TinkoffMobilePage chooseMaxPackage(){
+        logger.info("Выбираем максимальный пакет");
         return this
                 .selectMaxOptionCalls()
                 .selectMaxOptionInternet()
@@ -172,6 +181,7 @@ public class TinkoffMobilePage extends Page<TinkoffMobilePage> {
     }
 
     public TinkoffMobilePage chooseEmptyPackage(){
+        logger.info("Выбираем пустой пакет");
         return this
                 .selectFirstCallsOption()
                 .selectFirstInternetOption()

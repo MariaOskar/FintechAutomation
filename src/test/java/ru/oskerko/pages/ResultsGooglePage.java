@@ -5,11 +5,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ResultsGooglePage extends Page<ResultsGooglePage> {
-
+    Logger logger = LoggerFactory.getLogger(ResultsGooglePage.class);
     public static final By SEARCH_RESULTS = By.cssSelector("div.srg .g .rc .r > a");
 
     public ResultsGooglePage(WebDriver driver) {
@@ -23,7 +25,7 @@ public class ResultsGooglePage extends Page<ResultsGooglePage> {
     }
 
     public TinkoffMobilePage chooseResultByLink(String link){
-
+        logger.info("Выбираем результат поиска по ссылке "+link);
         boolean urlExists = false;
         for (WebElement l: getResultsList()){
             if (l.getAttribute("href").contains(link)){

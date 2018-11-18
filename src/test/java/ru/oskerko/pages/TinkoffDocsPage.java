@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.List;
@@ -15,7 +17,7 @@ import static com.lazerycode.selenium.util.http.TypeOfHash.SHA1;
 import static org.junit.Assert.assertEquals;
 
 public class TinkoffDocsPage extends Page<TinkoffDocsPage> {
-
+    Logger logger = LoggerFactory.getLogger(TinkoffDocsPage.class);
     private static final String TINKOFF_DOCS_LINK = "https://www.tinkoff.ru/mobile-operator/documents/";
 
     private static final String DOC_NAME = "Описание акции \"Удвоим минуты и гигабайты в первый месяц\"";
@@ -41,6 +43,7 @@ public class TinkoffDocsPage extends Page<TinkoffDocsPage> {
     }
 
     public String findLinkByTitle(String title){
+        logger.info("Ищем документ с именем: "+title);
         for(WebElement link : getLinks()){
             if (link.getText().equals(title)){
                 return link.getAttribute("href");
@@ -50,12 +53,15 @@ public class TinkoffDocsPage extends Page<TinkoffDocsPage> {
     }
 
     public void download(String href){
+        logger.info("Скачиваем документ по ссылке: "+href);
         try {
             FileDownloader fileDownloader = new FileDownloader(driver);
             fileDownloader.setURI(href);
             File secretFile = fileDownloader.downloadFile();
             int httpStatusCode = fileDownloader.getLastDownloadHTTPStatus();
+            logger.info("Проверяем статус загрузки");
             assertEquals(httpStatusCode, 200);
+            logger.info("Проверяем хеш файла на соответствие: "+DOC_HASH);
             assertEquals(getFileHash(secretFile, SHA1), DOC_HASH);
         } catch (Exception e) {
             throw new RuntimeException("Документ с таким именем не был загружен");

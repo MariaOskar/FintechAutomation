@@ -6,11 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.oskerko.elements.Select;
 import ru.oskerko.elements.TextInput;
 
 
 public class TinkoffJobsPage extends Page<TinkoffJobsPage> {
+    Logger logger = LoggerFactory.getLogger(TinkoffJobsPage.class);
     private static final String TINKOF_JOBS_URL = "https://moscow-job.tinkoff.ru/";
     private static final By FIO_ERROR_ELEMENT = By.cssSelector(".Row__row_AjrJL:nth-child(1)  .Error__errorMessage_q8BBY");
     private static final By EMAIL_ERROR_ELEMENT = By.cssSelector(".Row__row_AjrJL:nth-child(2) div:nth-child(1) .Error__errorMessage_q8BBY");
@@ -81,45 +84,55 @@ public class TinkoffJobsPage extends Page<TinkoffJobsPage> {
 
 
     public TinkoffJobsPage fillFIO(String str){
+        logger.info("Заполняем поле `Ф.И.О.`");
         fioField.setValue(str);
         return this;
     }
     public TinkoffJobsPage fillEmail(String str){
+        logger.info("Заполняем поле `Email`");
         emailField.setValue(str);
         return this;
     }
     public TinkoffJobsPage fillPhone(String str){
+        logger.info("Заполняем поле `Телефон`");
         phoneField.setValue(str);
         return this;
     }
     public TinkoffJobsPage fillCity(String str){
+        logger.info("Заполняем поле `Город`");
         cityField.setValue(str);
         return this;
     }
 
     public TinkoffJobsPage touchFIO(){
+        logger.info("Кликаем по полю `Ф.И.О.`");
         fioField.click();
         return this;
     }
     public TinkoffJobsPage touchEmail(){
+        logger.info("Кликаем по полю `Email`");
         emailField.click();
         return this;
     }
     public TinkoffJobsPage touchPhone(){
+        logger.info("Кликаем по полю `Телефон`");
         phoneField.click();
         return this;
     }
     public TinkoffJobsPage touchCity(){
+        logger.info("Кликаем по полю `Город`");
         cityField.click();
         return this;
     }
 
     public TinkoffJobsPage touchJobsField(){
+        logger.info("Кликаем по полю `Вакансия`");
         jobsField.click();
         return this;
     }
 
     public TinkoffJobsPage touchForm(){
+        logger.info("Кликаем по форме");
         form.click();
         return this;
     }

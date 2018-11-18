@@ -20,6 +20,13 @@ mvn test -Ddriver=firefox -Dtest=ru.oskerko.imported.JobFormTests,ru.oskerko.han
 - ru.oskerko.imported.JobFormTests
   - testRequiredFieldsMessages
   - testInvalidDataMessages
+
+- ru.oskerko.imported.MobileTariffsTests
+  - changeTabsTest
+  - changeRegionTest
+  - disabledButtonTest
+  - checkFileDownload
+
 - ru.oskerko.handwritten.JobFormTests
   - testRequiredFieldsMessages
   - testInvalidDataMessages
