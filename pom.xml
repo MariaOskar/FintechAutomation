@@ -16,7 +16,7 @@
             <version>2.22.1</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <driver>chrome</driver>
+                        <driver>firefox</driver>
                     </systemPropertyVariables>
                     <!--стратегия параллелизации-->
                     <parallel>methods</parallel>

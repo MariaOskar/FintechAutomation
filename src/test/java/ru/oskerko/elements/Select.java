@@ -81,4 +81,8 @@ public class Select {
     private String getTextFromHiddenElement(WebDriver driver, WebElement element){
         return (String)((JavascriptExecutor) driver).executeScript("return arguments[0].innerText;", element);
     }
+
+    public void click(){
+        getRoot().click();
+    }
 }
